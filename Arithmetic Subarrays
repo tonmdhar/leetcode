@@ -1,0 +1,21 @@
+class Solution {
+    public List<Boolean> checkArithmeticSubarrays(int[] nums, int[] l, int[] r) {
+        List<Boolean> bool = new ArrayList();
+        for(int i = 0; i<l.length; i++)
+            bool.add(helper(nums,l[i],r[i]));
+        return bool;
+    }
+    public boolean helper(int[] nums, int l, int r) {
+        int[] a = new int[r-l+1];
+        int j = 0;
+        for(int i = l; i<=r; i++)
+            a[j++] = nums[i];
+        Arrays.sort(a);
+        int diff = a[1] - a[0];
+        for(int i = 1; i<a.length-1; i++) {
+            if(diff != (a[i+1] - a[i]))
+                return false;
+        }
+        return true;
+    }
+}
