@@ -1,0 +1,15 @@
+class Solution {
+    public int goodNodes(TreeNode root) {
+        return check(root, root.val);
+    }
+    public int check(TreeNode root, int max) {
+        if(root == null)
+            return 0;
+        int count = 0;
+        if(root.val>=max) {
+            count = 1;
+            max = root.val;
+        }
+        return count + check(root.left,max) + check(root.right,max);
+    }
+}
