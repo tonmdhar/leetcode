@@ -1,0 +1,40 @@
+Approach 1
+class Solution {
+    public List<List<Integer>> levelOrder(Node root) {
+        List<List<Integer>> list = new ArrayList();
+        if(root == null)
+            return list;
+        Queue<Node> q = new LinkedList();
+        q.add(root);
+        while(!q.isEmpty()) {
+            List<Integer> l = new ArrayList();
+            int n = q.size();
+            for(int i = 0; i<n; i++) {
+                Node temp = q.poll();
+                for(Node child : temp.children)
+                    q.add(child);
+                l.add(temp.val);
+            }
+            list.add(l);
+        }
+        return list;
+    }
+}
+
+Approach 2
+class Solution {
+    public List<List<Integer>> levelOrder(Node root) {
+        List<List<Integer>> res = new ArrayList<>();
+        solve(root, 0, res);
+        return res;
+    }
+    
+    private void solve(Node root, int level, List<List<Integer>> res){
+        if(root == null) return;        
+        if(level >= res.size())
+            res.add(new ArrayList<>());        
+        res.get(level).add(root.val);        
+        for(Node n : root.children)
+            solve(n, level+1, res);
+    }
+}
