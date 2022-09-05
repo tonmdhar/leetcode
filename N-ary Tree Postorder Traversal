@@ -1,0 +1,14 @@
+class Solution {
+    public List<Integer> postorder(Node root) {
+        List<Integer> list = new ArrayList();
+        post(root,list);
+        return list;
+    }
+    public void post(Node root, List<Integer> list) {
+        if(root == null)
+            return;
+        for(Node child : root.children)
+            post(child,list);
+        list.add(root.val);
+    }
+}
