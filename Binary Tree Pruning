@@ -1,0 +1,19 @@
+class Solution {
+    public TreeNode pruneTree(TreeNode root) {
+        TreeNode temp = helper(root);
+        return temp;
+    }
+    public TreeNode helper(TreeNode root) {
+        if(root == null)
+            return null;
+        TreeNode left = helper(root.left);
+        TreeNode right = helper(root.right);
+        if(left == null)
+            root.left = null;
+        if(right == null)
+            root.right = null;
+        if(left == null && right == null && root.val == 0)
+            root = null;
+        return root;
+    }
+}
