@@ -1,0 +1,21 @@
+class Solution {
+    public int[] sumEvenAfterQueries(int[] nums, int[][] queries) {
+        int max = 0, j = 0;
+        for(int n : nums) {
+            if(n%2 == 0)
+                max += n;
+        }
+        int[] k = new int[nums.length];
+        for(int i = 0; i<queries.length; i++) {
+            int n = queries[i][1]; 
+            int m = queries[i][0];
+            if(nums[n]%2 == 0)
+                max -= nums[n];
+            nums[n] += m;
+            if(nums[n]%2 == 0)
+                max += nums[n];
+            k[j++] = max;
+        }
+        return k;
+    }
+}
